@@ -1,0 +1,45 @@
+classDiagram
+    class Apprenant {
+        +int id
+        +string nom
+        +string email
+        +string statut
+    }
+
+    class Administration {
+        +int id
+        +string nom
+        +string email
+        +string role
+    }
+
+    class Atelier {
+        +int id
+        +string nom
+        +string description
+        +datetime dateDebut
+        +datetime dateFin
+    }
+
+    class Groupe {
+        +int id
+        +string nom
+        +string description
+        +int atelierId
+        +int maxParticipants
+    }
+
+    class Inscription {
+        +int id
+        +int apprenantId
+        +int atelierId
+        +int groupeId
+        +datetime dateInscription
+    }
+
+    Apprenant "1" -- "*" Inscription : s'inscrire
+    Inscription "*" -- "1" Atelier : pour
+    Inscription "*" -- "1" Groupe : affecter
+    Administration "1" -- "*" Atelier : gérer
+    Administration "1" -- "*" Groupe : gérer
+    Administration "1" -- "*" Inscription : gérer

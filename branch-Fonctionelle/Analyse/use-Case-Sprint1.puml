@@ -1,0 +1,15 @@
+@startuml
+
+left to right direction
+actor Apprenant
+
+usecase "S'inscrire dans un atelier" as UC1
+usecase "Modifier une inscription" as UC2
+usecase "Consulter les groupes" as UC3
+usecase "Recevoir notifications" as UC4
+
+Apprenant -- UC1
+Apprenant -- UC2
+Apprenant -- UC3
+Apprenant -- UC4
+@enduml

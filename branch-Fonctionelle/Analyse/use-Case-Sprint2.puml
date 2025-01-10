@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+actor Administration
+
+usecase "Gérer les inscriptions" as UC5
+usecase "Gérer les groupes" as UC6
+usecase "CRUD ateliers" as UC7
+usecase "Consulter les statistiques" as UC8
+
+Administration -- UC5
+Administration -- UC6
+Administration -- UC7
+Administration -- UC8
+@enduml

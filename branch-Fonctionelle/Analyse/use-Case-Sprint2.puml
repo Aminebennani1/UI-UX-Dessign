@@ -2,10 +2,14 @@
 left to right direction
 actor Administration
 
+rectangle "Gestion des ateliers - Inscription et groupes"{
+
 usecase "Gérer les inscriptions" as UC5
 usecase "Gérer les groupes" as UC6
 usecase "CRUD ateliers" as UC7
 usecase "Consulter les statistiques" as UC8
+
+}
 
 Administration -- UC5
 Administration -- UC6

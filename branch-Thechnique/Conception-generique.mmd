@@ -1,3 +1,4 @@
+%%{init: {'themeVariables': { 'primaryColor': '#87CEEB', 'edgeLabelBackground':'#87CEEB', 'tertiaryColor': '#D6EAF8' }}}%%
 classDiagram
     class User {
         +id
@@ -40,13 +41,13 @@ classDiagram
     }
 
     %% Relations
-    User --|> Article : "writes"
-    Article --|> Comment : "has"
-    User --|> Comment : "adds"
-    Article --|> Tag : "has"
-    Article --|> Category : "belongs to"
-    Admin --|> Article : "manages"
-    Admin --|> Tag : "manages"
-    Admin --|> Category : "manages"
-    Admin --|> Comment : "manages"
-    Admin --|> User : "manages"
+    User --> Article : "writes"
+    Article --> Comment : "has"
+    User --> Comment : "adds"
+    Article --> Tag : "has"
+    Article --> Category : "belongs to"
+    Admin --> Article : "manages"
+    Admin --> Tag : "manages"
+    Admin --> Category : "manages"
+    Admin --> Comment : "manages"
+    Admin --> User : "manages"

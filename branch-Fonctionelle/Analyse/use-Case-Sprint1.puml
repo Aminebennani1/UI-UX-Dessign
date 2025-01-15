@@ -3,13 +3,19 @@
 left to right direction
 actor Apprenant
 
+rectangle "Gestion des ateliers - Inscription et groupes"{
+    
 usecase "S'inscrire dans un atelier" as UC1
 usecase "Modifier une inscription" as UC2
 usecase "Consulter les groupes" as UC3
 usecase "Recevoir notifications" as UC4
+usecase "Gérer ses informations personnelles" as UC5
+}
 
 Apprenant -- UC1
 Apprenant -- UC2
 Apprenant -- UC3
 Apprenant -- UC4
+Apprenant -- UC5
+
 @enduml

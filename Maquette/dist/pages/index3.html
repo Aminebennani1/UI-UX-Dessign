@@ -212,7 +212,7 @@
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                <span class="d-none d-md-inline">Amine bennani</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
@@ -223,7 +223,7 @@
                     alt="User Image"
                   />
                   <p>
-                    Alexander Pierce - Web Developer
+                    Amine bennani - Web Developer
                     <small>Member since Nov. 2023</small>
                   </p>
                 </li>
@@ -336,7 +336,7 @@
             padding: 0;
         }
         .container {
-            width:100%;
+            width: 100%;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
@@ -347,9 +347,20 @@
             text-align: center;
             color: #333;
         }
+        .search-bar {
+            margin: 10px auto;
+            text-align: center;
+        }
+        .search-bar input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         table {
             width: 90%;
-            margin-top: 20px;
+            margin: 20px auto;
             border-collapse: collapse;
             border: 1px solid #ccc;
         }
@@ -373,7 +384,6 @@
             color: #777;
             font-size: 18px;
         }
-        /* Styles pour les boutons */
         .action-buttons {
             display: flex;
             gap: 10px;
@@ -386,84 +396,100 @@
             cursor: pointer;
             font-weight: bold;
         }
-        .action-buttons button.edit {
-            background-color: #ffa60097;
+        .btn-warning {
             color: white;
-        }
-        .action-buttons button.delete {
-            background-color: #fc826c;
-            color: white;
-        }
-        .action-buttons button.verify {
-            background-color: #32cd32b2;
-            color: white;
-        }
-        .action-buttons button:hover {
-            opacity: 0.8;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>Inscriptions Atelier</h2>
-        
-        <!-- Message si aucune inscription n'est présente -->
-        <div class="empty-message">
-            <p>Aucune inscription à afficher pour le moment.</p>
-        </div>
+<div class="container">
+    <h2>Inscriptions Atelier</h2>
 
-        <!-- Tableau des inscriptions (Exemple) -->
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Nom de l'atelier</th>
-                    <th>Groupe</th>
-                    <th>Commentaires</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Exemple de ligne d'inscription -->
-                <tr>
-                    <td>1</td>
-                    <td>Jean Dupont</td>
-                    <td>jean.dupont@example.com</td>
-                    <td>Atelier de Développement Web</td>
-                    <td>Groupe 1: photography</td>
-                    <td>Aucune remarque</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="edit">Modifier</button>
-                            <button class="delete">Supprimer</button>
-                            <button class="verify">Vérifier</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Marie Dubois</td>
-                    <td>marie.dubois@example.com</td>
-                    <td>Atelier de Design UI/UX</td>
-                    <td>Groupe 2: git</td>
-                    <td>Préférer des exercices pratiques</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="edit">Modifier</button>
-                            <button class="delete">Supprimer</button>
-                            <button class="verify">Vérifier</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- Barre de recherche -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Rechercher dans le tableau..." onkeyup="filterTable()">
     </div>
+
+    <!-- Tableau des inscriptions -->
+    <table id="inscriptionsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Nom de l'atelier</th>
+                <th>Groupe</th>
+                <th>Commentaires</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Jean Dupont</td>
+                <td>jean.dupont@example.com</td>
+                <td>Atelier de Développement Web</td>
+                <td>Groupe 1: photography</td>
+                <td>Aucune remarque</td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="btn btn-warning">Modifier</button>
+                        <button class="btn btn-danger">Supprimer</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Marie Dubois</td>
+                <td>marie.dubois@example.com</td>
+                <td>Atelier de Design UI/UX</td>
+                <td>Groupe 2: git</td>
+                <td>Préférer des exercices pratiques</td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="btn btn-warning">Modifier</button>
+                        <button class="btn btn-danger">Supprimer</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Fonction pour filtrer le tableau
+    function filterTable() {
+        const searchInput = document.getElementById('searchInput');
+        const filter = searchInput.value.toLowerCase();
+        const table = document.getElementById('inscriptionsTable');
+        const rows = table.getElementsByTagName('tr');
+
+        // Parcours de toutes les lignes du tableau
+        for (let i = 1; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName('td');
+            let match = false;
+
+            // Parcours de toutes les cellules d'une ligne
+            for (let j = 0; j < cells.length; j++) {
+                if (cells[j]) {
+                    const textValue = cells[j].textContent || cells[j].innerText;
+                    if (textValue.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+            }
+
+            // Affiche ou masque la ligne selon le résultat
+            rows[i].style.display = match ? '' : 'none';
+        }
+    }
+</script>
 
 </body>
 </html>
+
 
       <!--end::App Main-->
       <!--begin::Footer-->
